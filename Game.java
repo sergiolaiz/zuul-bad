@@ -48,14 +48,14 @@ public class Game
         casetaAnimales = new Room("en la caseta de los animales");
 
         // initialise room exits
-        entrada.setExits(salon, comedor, habitacion,null);
-        salon.setExits(null, null, entrada,null);
-        cocina.setExits(null, null, comedor,null);
-        comedor.setExits(cocina, jadrinTrasero, aseo,entrada);
-        aseo.setExits(comedor, null, null,habitacion);
-        habitacion.setExits(entrada, aseo, null,null);
-        jadrinTrasero.setExits(null, casetaAnimales, null,comedor);
-        casetaAnimales.setExits(null, null, null,jadrinTrasero);
+        entrada.setExits(salon, comedor, habitacion,null,aseo);
+        salon.setExits(null, null, entrada,null,null);
+        cocina.setExits(null, null, comedor,null,null);
+        comedor.setExits(cocina, jadrinTrasero, aseo,entrada,null);
+        aseo.setExits(comedor, null, null,habitacion,null);
+        habitacion.setExits(entrada, aseo, null,null,null);
+        jadrinTrasero.setExits(null, casetaAnimales, null,comedor,null);
+        casetaAnimales.setExits(null, null, null,jadrinTrasero,null);
 
         currentRoom = entrada;  // start game outside
     }
@@ -164,6 +164,9 @@ public class Game
         if(direction.equals("oeste")) {
             nextRoom = currentRoom.westExit;
         }
+        if(direction.equals("sureste")) {
+            nextRoom = currentRoom.southEastExit;
+        }
 
         if (nextRoom == null) {
             System.out.println("¡No hay niguna puerta!");
@@ -204,6 +207,9 @@ public class Game
         }
         if(currentRoom.westExit != null) {
             System.out.print("oeste ");
+        }
+        if(currentRoom.southEastExit != null) {
+            System.out.print("sureste ");
         }
     }
 }
