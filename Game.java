@@ -136,7 +136,6 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
-
         return wantToQuit;
     }
 
@@ -153,7 +152,7 @@ public class Game
         System.out.println("antes de llegar tarde al trabajo.");
         System.out.println("Menunda manera de empezar el dia ¿Verdad?.");
         System.out.println("Que comando quieres escribir:");
-        System.out.println("   go quit help look eat");
+        parser.showCommands();
     }
 
     /** 
