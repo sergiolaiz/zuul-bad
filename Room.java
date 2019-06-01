@@ -16,9 +16,9 @@ import java.util.*;
  */
 public class Room 
 {
-    public String description;
+    private String description;
     private HashMap<String, Room> salidas;
-
+    private ArrayList<Item> objetos;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -29,6 +29,7 @@ public class Room
     {
         this.description = description;
         salidas =  new HashMap<>();
+        objetos = new ArrayList<Item>();
     }
 
     /**
@@ -88,5 +89,17 @@ public class Room
      */
     public String getLongDescription(){
         return "Estas en " + description + "\n" +  getExitString();
+    }
+    
+    public void addItem(Item newItem){
+        objetos.add(newItem);
+    }
+    
+    public String getItem(){
+        String cadenaObjetos = "";
+        for(int cont = 0; cont < objetos.size(); cont ++){
+            cadenaObjetos += (cont + 1) +": "+objetos.get(cont).toString() + "\n";
+        }
+        return cadenaObjetos;
     }
 }

@@ -39,6 +39,7 @@ public class Game
 
         // create the rooms
         entrada = new Room("Estas frente a la puerta de salida en la entrada de tu casa.");
+        entrada.addItem(new Item("funciona","o no"));
         salon = new Room("en el salon");
         cocina = new Room("en la cocina");
         comedor = new Room("en el comedor");
@@ -203,7 +204,7 @@ public class Game
     }
 
     private void look() {	
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(currentRoom.getItem());
     }
     
     private void eat() {	
