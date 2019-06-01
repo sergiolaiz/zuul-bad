@@ -150,7 +150,7 @@ public class Game
     {
         System.out.println("Has perdido las llaves del coche y necesitas salir de casa");
         System.out.println("antes de llegar tarde al trabajo.");
-        System.out.println("Menunda manera de empezar el dia ¿Verdad?.");
+        System.out.println("Menunda manera de empezar el dia ¿Verdad?.\n");
         System.out.println("Que comando quieres escribir:");
         parser.showCommands();
     }
