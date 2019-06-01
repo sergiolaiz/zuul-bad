@@ -48,14 +48,14 @@ public class Game
         casetaAnimales = new Room("en la caseta de los animales");
 
         // initialise room exits
-        entrada.setExits(salon, comedor, habitacion,null,aseo);
-        salon.setExits(null, null, entrada,null,null);
-        cocina.setExits(null, null, comedor,null,null);
-        comedor.setExits(cocina, jadrinTrasero, aseo,entrada,null);
-        aseo.setExits(comedor, null, null,habitacion,null);
-        habitacion.setExits(entrada, aseo, null,null,null);
-        jadrinTrasero.setExits(null, casetaAnimales, null,comedor,null);
-        casetaAnimales.setExits(null, null, null,jadrinTrasero,null);
+        entrada.setExits(salon, comedor, habitacion,null,aseo,cocina);
+        salon.setExits(null, null, entrada,null,null,null);
+        cocina.setExits(null, null, comedor,null,null,null);
+        comedor.setExits(cocina, jadrinTrasero, aseo,entrada,null,null);
+        aseo.setExits(comedor, null, null,habitacion,null,null);
+        habitacion.setExits(entrada, aseo, null,null,null,null);
+        jadrinTrasero.setExits(null, casetaAnimales, null,comedor,null,null);
+        casetaAnimales.setExits(null, null, null,jadrinTrasero,null,null);
 
         currentRoom = entrada;  // start game outside
     }

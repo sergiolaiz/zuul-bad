@@ -20,6 +20,7 @@ public class Room
     private Room eastExit;
     private Room westExit;
     private Room southEastExit;
+    private Room northEastExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -40,7 +41,7 @@ public class Room
      * @param south The south exit.
      * @param west The west exit.
      */
-    public void setExits(Room north, Room east, Room south, Room west,Room southEast) 
+    public void setExits(Room north, Room east, Room south, Room west,Room southEast, Room northEast) 
     {
         if(north != null)
             northExit = north;
@@ -52,6 +53,8 @@ public class Room
             westExit = west;
         if(southEast != null)
             southEastExit = southEast;
+        if(northEast != null)
+            northEastExit = northEast;
     }
 
     /**
@@ -79,9 +82,12 @@ public class Room
         if(direccion.equalsIgnoreCase("southEast")){
             habitacionDondeIr = southEastExit;
         }
+        if(direccion.equalsIgnoreCase("northEast")){
+            habitacionDondeIr = northEastExit;
+        }
         return habitacionDondeIr;
     }
-    
+
     public String getExitString(){
         String cadenaADevolver = "Salidas: ";
         if(northExit != null){
@@ -99,7 +105,10 @@ public class Room
         if(southEastExit != null){
             cadenaADevolver += "southEast ";
         }
-        
+        if(northEastExit != null){
+            cadenaADevolver += "northEast ";
+        }
+
         return cadenaADevolver;
     }
 }
