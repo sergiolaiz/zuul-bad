@@ -15,11 +15,11 @@
 public class Room 
 {
     public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
-    public Room southEastExit;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
+    private Room southEastExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -62,4 +62,44 @@ public class Room
         return description;
     }
 
+    public Room getExit(String direccion){
+        Room habitacionDondeIr =  null;        
+        if(direccion.equalsIgnoreCase("north")){
+            habitacionDondeIr = northExit;
+        }
+        if(direccion.equalsIgnoreCase("south")){
+            habitacionDondeIr = southExit;
+        }
+        if(direccion.equalsIgnoreCase("east")){
+            habitacionDondeIr = eastExit;
+        }
+        if(direccion.equalsIgnoreCase("west")){
+            habitacionDondeIr = westExit;
+        }
+        if(direccion.equalsIgnoreCase("southEast")){
+            habitacionDondeIr = southEastExit;
+        }
+        return habitacionDondeIr;
+    }
+    
+    public String getExitString(){
+        String cadenaADevolver = "Salidas: ";
+        if(northExit != null){
+            cadenaADevolver += "north ";
+        }
+        if(southExit != null){
+            cadenaADevolver += "south ";
+        }
+        if(eastExit != null){
+            cadenaADevolver += "east ";
+        }
+        if(westExit != null){
+            cadenaADevolver += "west ";
+        }
+        if(southEastExit != null){
+            cadenaADevolver += "southEast ";
+        }
+        
+        return cadenaADevolver;
+    }
 }
