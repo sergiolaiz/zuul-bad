@@ -53,24 +53,24 @@ public class Game
         entrada.setExit("east",comedor);
         entrada.setExit("southEast",aseo);
         entrada.setExit("northEast",habitacion);
-        
+
         salon.setExit("east",entrada);
-        
+
         habitacion.setExit("north",entrada);
         habitacion.setExit("east",aseo);
-        
+
         cocina.setExit("east",comedor);
-        
+
         comedor.setExit("north",cocina);
         comedor.setExit("south",aseo);
         comedor.setExit("east",jadrinTrasero);        
         comedor.setExit("west",entrada);
-        
+
         jadrinTrasero.setExit("east",casetaAnimales);
         jadrinTrasero.setExit("west",comedor);
-        
+
         casetaAnimales.setExit("west",jadrinTrasero);
-        
+
         currentRoom = entrada;  // start game outside
     }
 
@@ -101,7 +101,7 @@ public class Game
         System.out.println("Bienvenido a mi horrible mañana antes de ir a trabajar");
         System.out.println("Este es el juego que toda persona desa tener que jugar cada mañana");
         System.out.println("o no... veamos si te es divertido.\n");
-        System.out.println("Escribe 'ayuda' en caso de que necesites ayuda.");
+        System.out.println("Escribe 'help' en caso de que necesites ayuda.");
         preguntarUbicacion();
         System.out.println();
     }
@@ -127,6 +127,9 @@ public class Game
         else if (commandWord.equals("go")) {
             goRoom(command);
         }
+        else if (commandWord.equals("look")) {	
+            look();
+        }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -147,7 +150,7 @@ public class Game
         System.out.println("antes de llegar tarde al trabajo.");
         System.out.println("Menunda manera de empezar el dia ¿Verdad?.");
         System.out.println("Que comando quieres escribir:");
-        System.out.println("   go quit help");
+        System.out.println("   go quit help look");
     }
 
     /** 
@@ -195,5 +198,9 @@ public class Game
     private void preguntarUbicacion(){
         System.out.println(currentRoom.getLongDescription());
         System.out.println();
+    }
+
+    private void look() {	
+        System.out.println(currentRoom.getLongDescription());
     }
 }
