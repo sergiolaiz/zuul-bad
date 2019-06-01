@@ -130,6 +130,9 @@ public class Game
         else if (commandWord.equals("look")) {	
             look();
         }
+        else if (commandWord.equals("eat")) {	
+            eat();
+        }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
@@ -150,7 +153,7 @@ public class Game
         System.out.println("antes de llegar tarde al trabajo.");
         System.out.println("Menunda manera de empezar el dia ¿Verdad?.");
         System.out.println("Que comando quieres escribir:");
-        System.out.println("   go quit help look");
+        System.out.println("   go quit help look eat");
     }
 
     /** 
@@ -202,5 +205,9 @@ public class Game
 
     private void look() {	
         System.out.println(currentRoom.getLongDescription());
+    }
+    
+    private void eat() {	
+        System.out.println("Acabas de comer y ya no tienes hambre");
     }
 }
