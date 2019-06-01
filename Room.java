@@ -31,6 +31,11 @@ public class Room
         salidas =  new HashMap<>();
     }
 
+    /**
+     * Define una salida para la habitacion.
+     * @param direction El nombre de la direccion de la salida
+     * @param neighbor La habitacion a la que se llega usando esa salida
+     */
     public void setExit(String direction, Room neighbor){
         salidas.put(direction,neighbor);
     }
@@ -67,26 +72,21 @@ public class Room
     }
 
     public String getExitString(){
-        String cadenaADevolver = "Salidas: ";
-        if(salidas.get("north") != null){
-            cadenaADevolver += "north ";
+        Set<String> posiblesDirecciones = salidas.keySet();
+        String descripcionSalidas = "Posibles salidas: ";
+        for(String salida : posiblesDirecciones){
+            descripcionSalidas += salida + " ";
         }
-        if(salidas.get("south") != null){
-            cadenaADevolver += "south ";
-        }
-        if(salidas.get("east") != null){
-            cadenaADevolver += "east ";
-        }
-        if(salidas.get("west") != null){
-            cadenaADevolver += "west ";
-        }
-        if(salidas.get("southEast") != null){
-            cadenaADevolver += "southEast ";
-        }
-        if(salidas.get("northEast") != null){
-            cadenaADevolver += "northEast ";
-        }
+        return descripcionSalidas;
+    }
 
-        return cadenaADevolver;
+    /**
+     * Devuelve un texto con la descripcion larga de la habitacion del tipo:
+     *     You are in the 'name of room'
+     *     Exits: north west southwest
+     * @return Una descripcion de la habitacion incluyendo sus salidas
+     */
+    public String getLongDescription(){
+        return "Estas en " + description + "\n" +  getExitString();
     }
 }

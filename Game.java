@@ -193,8 +193,7 @@ public class Game
     }
 
     private void preguntarUbicacion(){
-        System.out.println("Estas " + currentRoom.getDescription()+ "\n");
-        System.out.print(currentRoom.getExitString());
+        System.out.println(currentRoom.getLongDescription());
         System.out.println();
     }
 }
