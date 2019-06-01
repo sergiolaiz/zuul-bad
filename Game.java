@@ -20,7 +20,6 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-
     /**
      * Create the game and initialise its internal map.
      */
