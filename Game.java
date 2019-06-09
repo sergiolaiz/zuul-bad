@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -20,6 +20,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Room [] habitaciones;
     /**
      * Create the game and initialise its internal map.
      */
@@ -27,6 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        habitaciones = new Room [2];
     }
 
     /**
@@ -72,6 +74,7 @@ public class Game
         casetaAnimales.setExit("west",jadrinTrasero);
 
         currentRoom = entrada;  // start game outside
+
     }
 
     /**
@@ -80,7 +83,6 @@ public class Game
     public void play() 
     {            
         printWelcome();
-
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
 
@@ -127,14 +129,17 @@ public class Game
         else if (commandWord.equals("go")) {
             goRoom(command);
         }
-        else if (commandWord.equals("look")) {	
+        else if (commandWord.equals("look")) {  
             look();
         }
-        else if (commandWord.equals("eat")) {	
+        else if (commandWord.equals("eat")) {   
             eat();
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
+        }
+        else if (commandWord.equals("back")) {
+            back();
         }
         return wantToQuit;
     }
@@ -176,7 +181,19 @@ public class Game
             System.out.println("¡No hay niguna puerta!");
         }
         else {
-            currentRoom = nextRoom;
+
+            if(habitaciones[0]==null){
+                habitaciones[0] = currentRoom;
+            }
+            else if(habitaciones[1]==null){
+                habitaciones[1] = currentRoom;
+            }
+            else{
+                Room roomTemp = habitaciones[1];
+                habitaciones[0] = roomTemp;
+                habitaciones[1] = currentRoom;
+            }
+            currentRoom = nextRoom;            
             preguntarUbicacion();
         }
     }
@@ -202,11 +219,22 @@ public class Game
         System.out.println();
     }
 
-    private void look() {	
+    private void look() {   
         System.out.println(currentRoom.getItem());
     }
-    
-    private void eat() {	
+
+    private void eat() {    
         System.out.println("Acabas de comer y ya no tienes hambre");
+    }
+
+    private void back(){
+        if(habitaciones[1] != null){
+            currentRoom = habitaciones[1];
+            habitaciones[1] =  null;
+        }
+        else {
+            currentRoom = habitaciones[0];
+        }
+        preguntarUbicacion();
     }
 }
