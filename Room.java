@@ -11,7 +11,7 @@ import java.util.*;
  * east, south, west.  For each direction, the room stores a reference
  * to the neighboring room, or null if there is no exit in that direction.
  * 
- * @author  Michael KÃ¶lling and David J. Barnes
+ * @author  Michael Kölling and David J. Barnes
  * @version 2011.07.31
  */
 public class Room 
@@ -19,6 +19,16 @@ public class Room
     private String description;
     private HashMap<String, Room> salidas;
     private ArrayList<Item> objetos;
+    private static final String NORTE = "norte";
+    private static final String SUR = "sur";
+    private static final String ESTE = "este";
+    private static final String OESTE = "oeste";
+    private static final String NOROESTE = "noroeste";
+    private static final String NORESTE = "noreste";
+    private static final String SURESTE = "sureste";
+    private static final String SUROESTE = "suroeste";
+
+    private int siguienteId;
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
@@ -30,6 +40,7 @@ public class Room
         this.description = description;
         salidas =  new HashMap<>();
         objetos = new ArrayList<Item>();
+        siguienteId = 1;
     }
 
     /**
@@ -51,23 +62,29 @@ public class Room
 
     public Room getExit(String direccion){
         Room habitacionDondeIr =  null;        
-        if(direccion.equalsIgnoreCase("north")){
-            habitacionDondeIr = salidas.get("north");
+        if(direccion.equalsIgnoreCase(NORTE)){
+            habitacionDondeIr = salidas.get(NORTE);
         }
-        if(direccion.equalsIgnoreCase("south")){
-            habitacionDondeIr = salidas.get("south");
+        if(direccion.equalsIgnoreCase(SUR)){
+            habitacionDondeIr = salidas.get(SUR);
         }
-        if(direccion.equalsIgnoreCase("east")){
-            habitacionDondeIr = salidas.get("east");
+        if(direccion.equalsIgnoreCase(ESTE)){
+            habitacionDondeIr = salidas.get(ESTE);
         }
-        if(direccion.equalsIgnoreCase("west")){
-            habitacionDondeIr = salidas.get("west");
+        if(direccion.equalsIgnoreCase(OESTE)){
+            habitacionDondeIr = salidas.get(OESTE);
         }
-        if(direccion.equalsIgnoreCase("southEast")){
-            habitacionDondeIr = salidas.get("southEast");
+        if(direccion.equalsIgnoreCase(SURESTE)){
+            habitacionDondeIr = salidas.get(SURESTE);
         }
-        if(direccion.equalsIgnoreCase("northEast")){
-            habitacionDondeIr = salidas.get("northEast");
+        if(direccion.equalsIgnoreCase(NORESTE)){
+            habitacionDondeIr = salidas.get(NORESTE);
+        }
+        if(direccion.equalsIgnoreCase(SUROESTE)){
+            habitacionDondeIr = salidas.get(SUROESTE);
+        }
+        if(direccion.equalsIgnoreCase(NOROESTE)){
+            habitacionDondeIr = salidas.get(NOROESTE);
         }
         return habitacionDondeIr;
     }
@@ -90,15 +107,54 @@ public class Room
     public String getLongDescription(){
         return "Estas en " + description + "\n" +  getExitString();
     }
-    
-    public void addItem(Item newItem){
-        objetos.add(newItem);
+
+    public void addItem(String id,String descripcion,int pesoGramos,boolean canBePickedUp ){
+        Item itemNuevo = new Item(id,descripcion,pesoGramos,canBePickedUp);
+        objetos.add(itemNuevo);
+        siguienteId ++;
+    }
+
+    public Item getItemPorId(String id){
+        Item itemBuscado = null;
+        if(!objetos.isEmpty()){
+            boolean buscando = true;
+            int cont = 0;
+            while (cont < objetos.size() && buscando ){
+                if(objetos.get(cont).getId().equalsIgnoreCase(id)){
+                    itemBuscado = objetos.get(cont);
+                    buscando =  false;
+                }
+                cont ++;
+            }
+        }
+        return itemBuscado;
     }
     
+    public void soltarObjeto(Item item){
+        objetos.add(item);
+    }
+
+    public void eliminarItem(String id){
+        if(!objetos.isEmpty()){
+            boolean buscando = true;
+            int cont = 0;
+            while (cont < objetos.size() && buscando ){
+                if(objetos.get(cont).getId().equalsIgnoreCase(id)){
+                    objetos.remove(cont);
+                    buscando =  false;
+                }
+                cont ++;
+            }
+        }
+    }
+
     public String getItem(){
-        String cadenaObjetos = "";
-        for(int cont = 0; cont < objetos.size(); cont ++){
-            cadenaObjetos += (cont + 1) +": "+objetos.get(cont).toString() + "\n";
+        String cadenaObjetos = "Losiento , no hay objetos\n";
+        if(!objetos.isEmpty()){
+            cadenaObjetos =  "";
+            for(Item itemTemp : objetos){
+                cadenaObjetos += itemTemp.toString() + "\n";
+            }
         }
         return cadenaObjetos;
     }
