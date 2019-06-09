@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class Item here.
  *
@@ -8,19 +7,39 @@
 public class Item
 {
     // instance variables - replace the example below with your own
-    private String nombre;
     private String descripcion;
-
+    private int pesoGramos;
+    private String id;
+    private boolean canBePickedUp ; 
     /**
      * Constructor for objects of class Item
      */
-    public Item(String nombre,String descripcion)
+    public Item(String id,String descripcion, int pesoGramos, boolean canBePickedUp )
     {
-        this.nombre = nombre;
+        this.pesoGramos = pesoGramos;
         this.descripcion = descripcion;
+        this.id = id;
+        this.canBePickedUp  = canBePickedUp ;
+    }
+    
+    
+    public boolean getCanBePickedUp(){
+        return canBePickedUp;
+    }
+    
+    public int getPeso(){
+        return pesoGramos;
+    }
+    
+    public String getDescripcion(){
+        return descripcion;
+    }
+    
+    public String getId(){
+        return id;
     }
 
     public String toString(){
-        return nombre + " :" +descripcion;
+        return id + ": " +descripcion + ", peso " + pesoGramos + "g.";
     }
 }
