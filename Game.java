@@ -133,6 +133,8 @@ public class Game
         habitacion.addItem("escritorio","algun dia tendre que ordenarlo", 0, false);
         habitacion.addItem("silla","mi silla comoda del ikea", 0, false);
         habitacion.addItem("catalogo","nuevo catalogo de IKEA ¡Como me gusta!",200, true);
+        
+        
 
         return entrada;  // start game outside
     }
@@ -164,7 +166,7 @@ public class Game
         System.out.println("Bienvenido a mi horrible mañana antes de ir a trabajar");
         System.out.println("Este es el juego que toda persona desa tener que jugar cada mañana");
         System.out.println("o no... veamos si te es divertido.\n");
-        System.out.println("Escribe 'help' en caso de que necesites ayuda.");
+        System.out.println("Escribe 'ayuda' en caso de que necesites ayuda.");
         jugador.preguntarUbicacion();
         System.out.println();
     }
@@ -208,9 +210,6 @@ public class Game
         }
         else if (commandWord.equals("soltar")) {
             jugador.dropElemento(command.getSecondWord());
-        }
-        else if (commandWord.equals("beber")) {
-            jugador.drink(command.getSecondWord());
         }
         return wantToQuit;
     }
