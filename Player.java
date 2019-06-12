@@ -10,7 +10,7 @@ public class Player
 {
     private Room currentRoom;
     private Stack movimientos;
-    private static final int PESO_MAXIMO_MOCHILA = 400;
+    private int pesoMaximoMochila;
     private ArrayList <Item> mochila;
     private int pesoMochila;
     private String nombreJugador;
@@ -18,9 +18,9 @@ public class Player
     /**
      * Constructor for objects of class Player
      */
-    public Player(String nombreJugador)
+    public Player(int pesoMaximoMochila)
     {
-        this.nombreJugador =  nombreJugador;
+        this.pesoMaximoMochila = pesoMaximoMochila;
         movimientos = new  Stack();
         mochila = new ArrayList();
         pesoMochila = 0;
@@ -54,14 +54,14 @@ public class Player
         String espacioDisponible = "";
         Item itemTemp = currentRoom.getItemPorId(idItem);
         int pesoConObjeto = pesoMochila + itemTemp.getPeso();
-        if(pesoConObjeto <= PESO_MAXIMO_MOCHILA && itemTemp.getCanBePickedUp() ){
-                mochila.add(itemTemp);
-                //Eliminamos el item de la habitacion
-                currentRoom.eliminarItem(idItem);
-                espacioDisponible = String.valueOf(PESO_MAXIMO_MOCHILA - pesoConObjeto) + "g.";
-                pesoMochila += itemTemp.getPeso();
-                cadeneaADevolver = "Has cojido " + itemTemp.getId() +
-                ". Espacio disponible "+ espacioDisponible +"\n";
+        if(pesoConObjeto <= pesoMaximoMochila && itemTemp.getCanBePickedUp() ){
+            mochila.add(itemTemp);
+            //Eliminamos el item de la habitacion
+            currentRoom.eliminarItem(idItem);
+            espacioDisponible = String.valueOf(pesoMaximoMochila - pesoConObjeto) + "g.";
+            pesoMochila += itemTemp.getPeso();
+            cadeneaADevolver = "Has cogido " + itemTemp.getId() +
+            ". Espacio disponible "+ espacioDisponible +"\n";
         }
         else if(!itemTemp.getCanBePickedUp()){
             cadeneaADevolver = "No se puede coger este objeto\n";
@@ -83,7 +83,7 @@ public class Player
             for(Item itemTem : mochila){
                 cadenaADevolver += itemTem.getId() +":" + itemTem.getDescripcion() + "\n";
             }
-            System.out.println(cadenaADevolver + "Espacio disponible :" +(PESO_MAXIMO_MOCHILA - pesoMochila ) + "\n");
+            System.out.println(cadenaADevolver + "Espacio disponible :" +(pesoMaximoMochila - pesoMochila ) + "\n");
         }
         else{
             System.out.println("La mochila esta vacia\n");
@@ -110,8 +110,31 @@ public class Player
         }
         preguntarUbicacion();
     }
-    
 
+    public void drink (String idItem){
+        String cadeneaADevolver ="";
+        Item itemTemp = currentRoom.getItemPorId(idItem);
+        if(currentRoom.encontrarObjeto(itemTemp) && idItem != null){
+            if(itemTemp.getId().equalsIgnoreCase("agua") || itemTemp.getId().equalsIgnoreCase("cerveza")){
+                if(itemTemp.getId().equalsIgnoreCase("agua")){
+                    pesoMaximoMochila += itemTemp.getPeso();
+                    cadeneaADevolver += "Creo que me ha sentado bien, me siento con mas fuerza\n";
+                    currentRoom.eliminarItem(idItem);
+                }
+
+                else{
+                    pesoMaximoMochila = pesoMochila;
+                    cadeneaADevolver += "Creo que me ha sentado mal tomar esto.\n";
+                    currentRoom.eliminarItem(idItem);
+                }
+            }
+        }
+        else{
+            cadeneaADevolver += "Losiento, esto no se puede beber\n";
+        }
+        System.out.println(cadeneaADevolver);
+        preguntarUbicacion();    
+    }
 
     /** 
      * Try to go in one direction. If there is an exit, enter
@@ -144,7 +167,7 @@ public class Player
             preguntarUbicacion();
         }
     }
-    
+
     public void back(){
         //comprobamos que nuestra lista de movimientos no este vacia para saber si ya regresamos al
         //inicio

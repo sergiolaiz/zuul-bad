@@ -38,7 +38,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        jugador = new Player("Pedro");
+        jugador = new Player(400);
     }
 
     /**
@@ -50,12 +50,8 @@ public class Game
 
         // create the rooms
         entrada = new Room(" frente a la puerta de salida en la entrada de tu casa.");
-        entrada.addItem("cartera","Casi se me olvida",200, true);
-        entrada.addItem("movil","Sin movil no puedo vivir",200, true);
-        entrada.addItem("boli","suelta",20,false);
         salon = new Room("en el salon");
         cocina = new Room("en la cocina");
-        cocina.addItem("cerveza","puedes beberla",0,false);
         comedor = new Room("en el comedor");
         aseo = new Room("en el aseo");
         habitacion = new Room("en la habitacion");
@@ -90,6 +86,53 @@ public class Game
         jadrinTrasero.setExit(OESTE,comedor);
 
         casetaAnimales.setExit(OESTE,jadrinTrasero);
+
+        //Creamos objetos en las habitaciones
+        entrada.addItem("cartera","Casi se me olvida",200, true);
+        entrada.addItem("movil","Sin movil no puedo vivir",200, true);
+        entrada.addItem("zapatero","el zapatero del ikea",0,false);
+        entrada.addItem("perchero","no hay cazadoras",0,false);
+        entrada.addItem("paraguas","no creo que llueva",0,false);
+
+        salon.addItem("boli","realmente no lo necesito",5,true);
+        salon.addItem("papeles","menudo desorden",20,true);
+        salon.addItem("televisor","mi nuevo televisor de 49\"",0,false);
+        salon.addItem("sofa","deberia limpiarlo, tiene pelos de animal",0,false);
+        salon.addItem("lampara","la lampara led del ikea",0,false);
+        salon.addItem("chimena","da calor cuando esta encendida, cuando no, no",0,false);
+
+        cocina.addItem("cerveza","Esto no me tiene que sentar bien ahora",200,false);
+        cocina.addItem("agua","Igual me viene bien refrescarme",200,false);
+        cocina.addItem("plato","un plato limpio",100,true);
+        cocina.addItem("cuchara","no le veo utilidad en este momento",20,true);
+        cocina.addItem("cafetera","ya me tome un buen cafe",0,false);
+        cocina.addItem("nevera","esta medio vacia, hay que comprar",0,false);
+        cocina.addItem("vitroceramica","perfecta para hacerte unas papas",0,false);
+
+        comedor.addItem("mesa","se nota que no me gusta limpiar",0,false);
+        comedor.addItem("sillas","menudo desorden de sillas",0,false);
+        comedor.addItem("chicles","son de fresa",10,true);
+        comedor.addItem("jarron","es el jarron que me regalo la abuela",500,true);
+
+        aseo.addItem("cepillo","ya me he limpiado los dientes",20,true);
+        aseo.addItem("espejo","ya me he visto la cara de dormido",20,false);
+        aseo.addItem("gel","para lavarse las manos",100,true);
+        aseo.addItem("toalla","para secarme las manos",200,true);
+
+        jadrinTrasero.addItem("rosas","aun estan floreciendo",0,false);
+        jadrinTrasero.addItem("tomate","ya empiza a salir algun tomate",150,true);
+        jadrinTrasero.addItem("lechuga","casi estan listas para comer",0,false);
+
+        casetaAnimales.addItem("huevos","siempre encuentro alguno por el suelo",60,true);
+        casetaAnimales.addItem("trigo","deberia comprar, se esta acabando",0,false);
+
+        habitacion.addItem("cama","mi bonita cama de 1,50",0,false);
+        habitacion.addItem("ordenador","es un msi, y solo sirve para calentarse.",0,false);
+        habitacion.addItem("armario","lleno de ropa que casi ni uso", 0, false);
+        habitacion.addItem("estanteria","llena de juegos", 0,false);
+        habitacion.addItem("escritorio","algun dia tendre que ordenarlo", 0, false);
+        habitacion.addItem("silla","mi silla comoda del ikea", 0, false);
+        habitacion.addItem("catalogo","nuevo catalogo de IKEA ¡Como me gusta!",200, true);
 
         return entrada;  // start game outside
     }
@@ -131,7 +174,7 @@ public class Game
      * @param command The command to be processed.
      * @return true If the command ends the game, false otherwise.
      */
-    private boolean processCommand(Command command) 
+        private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
         if(command.isUnknown()) {
@@ -139,35 +182,36 @@ public class Game
             return false;
         }
         String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
+        if (commandWord.equals("ayuda")) {
             printHelp();
         }
-        else if (commandWord.equals("go")) {
+        else if (commandWord.equals("ir")) {
             jugador.goRoom(command);
         }
-        else if (commandWord.equals("look")) {  
+        else if (commandWord.equals("mirar")) {  
             jugador.look();
         }
-        else if (commandWord.equals("eat")) {   
+        else if (commandWord.equals("comer")) {   
             jugador.eat();
         }
-        else if (commandWord.equals("quit")) {
+        else if (commandWord.equals("salir")) {
             wantToQuit = quit(command);
         }
-        else if (commandWord.equals("back")) {
+        else if (commandWord.equals("atras")) {
             jugador.back();
-            currentRoom =  jugador.getRoom();
         }
-        else if (commandWord.equals("take")) {
+        else if (commandWord.equals("coger")) {
             jugador.take(command.getSecondWord());
         }
         else if (commandWord.equals("mochila")) {
             jugador.verMochila();
         }
-        else if (commandWord.equals("drop")) {
+        else if (commandWord.equals("soltar")) {
             jugador.dropElemento(command.getSecondWord());
         }
-
+        else if (commandWord.equals("beber")) {
+            jugador.drink(command.getSecondWord());
+        }
         return wantToQuit;
     }
 

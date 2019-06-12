@@ -129,7 +129,7 @@ public class Room
         }
         return itemBuscado;
     }
-    
+
     public void soltarObjeto(Item item){
         objetos.add(item);
     }
@@ -146,6 +146,20 @@ public class Room
                 cont ++;
             }
         }
+    }
+
+    public boolean encontrarObjeto(Item item){
+        boolean encontrado = false;
+        if(!objetos.isEmpty()){
+            int cont = 0;
+            while (cont < objetos.size() && !encontrado ){
+                if(objetos.get(cont) == item){
+                    encontrado =  true;
+                }
+                cont ++;
+            }
+        }
+        return encontrado;    
     }
 
     public String getItem(){

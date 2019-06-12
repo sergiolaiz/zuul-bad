@@ -40,6 +40,7 @@ public class Item
     }
 
     public String toString(){
-        return id + ": " +descripcion + ", peso " + pesoGramos + "g.";
+        String peso = (pesoGramos != 0)? ", peso " + Integer.toString(pesoGramos)+ "g." : "." ;
+        return id + ": " + descripcion +  peso ;
     }
 }
