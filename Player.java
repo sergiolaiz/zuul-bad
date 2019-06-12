@@ -73,7 +73,10 @@ public class Player
         movimientos.push(habitacion);
     }
 
-    public void verMochila(){ 
+    /**
+     * Metodo que permite mostrar por pantalla el contenido de nuestra mochila
+     */
+    public void verMochila(){
         if(!mochila.isEmpty()){
             String cadenaADevolver = "Contenido mochila : \n";
             for(Item itemTem : mochila){
@@ -105,7 +108,6 @@ public class Player
         }
         preguntarUbicacion();
     }
-
 
     /** 
      * Try to go in one direction. If there is an exit, enter
