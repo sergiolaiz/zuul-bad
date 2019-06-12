@@ -38,7 +38,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        jugador = new Player(400);
+        jugador = new Player();
     }
 
     /**
@@ -133,6 +133,8 @@ public class Game
         habitacion.addItem("escritorio","algun dia tendre que ordenarlo", 0, false);
         habitacion.addItem("silla","mi silla comoda del ikea", 0, false);
         habitacion.addItem("catalogo","nuevo catalogo de IKEA ¡Como me gusta!",200, true);
+        
+        
 
         return entrada;  // start game outside
     }
@@ -208,9 +210,6 @@ public class Game
         }
         else if (commandWord.equals("soltar")) {
             jugador.dropElemento(command.getSecondWord());
-        }
-        else if (commandWord.equals("beber")) {
-            jugador.drink(command.getSecondWord());
         }
         return wantToQuit;
     }
