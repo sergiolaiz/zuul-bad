@@ -38,7 +38,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        jugador = new Player();
+        jugador = new Player(400);
     }
 
     /**
@@ -166,7 +166,7 @@ public class Game
         System.out.println("Bienvenido a mi horrible mañana antes de ir a trabajar");
         System.out.println("Este es el juego que toda persona desa tener que jugar cada mañana");
         System.out.println("o no... veamos si te es divertido.\n");
-        System.out.println("Escribe 'help' en caso de que necesites ayuda.");
+        System.out.println("Escribe 'ayuda' en caso de que necesites ayuda.");
         jugador.preguntarUbicacion();
         System.out.println();
     }
