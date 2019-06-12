@@ -94,7 +94,7 @@ public class Player
     }
 
     /**
-     * Metodo que permite beber agua o cerveza, agua = +200g mochila | cerveza = -200g mochila o 0g
+     * Metodo que permite beber agua o cerveza, agua = +200g mochila | cerveza = iguala el peso maximo al peso de los objetos de tu mochila.
      * 
      *  @param idItem = nombre de la bebida
      */
@@ -122,7 +122,7 @@ public class Player
         System.out.println(cadeneaADevolver);
         preguntarUbicacion();    
     }
-    
+
     /**
      * Metodo que permite almacenar la habitacion
      */
@@ -133,16 +133,18 @@ public class Player
     /**
      * Metodo que permite mostrar por pantalla el contenido de nuestra mochila
      */
-    public void verMochila(){
+    public void verMochila(){ 
         if(!mochila.isEmpty()){
             String cadenaADevolver = "Contenido mochila : \n";
             for(Item itemTem : mochila){
-                cadenaADevolver += itemTem.getId() +":" + itemTem.getDescripcion() + "\n";
+                cadenaADevolver += " - "+ itemTem.getId() +":" + itemTem.getDescripcion() + "\n";
             }
+            System.out.println(cadenaADevolver + "Espacio utilizado :" + pesoMochila + "g.\n");
         }
         else{
             System.out.println("La mochila esta vacia\n");
         }
+        System.out.println("Espacio disponible "+ (pesoMaximoMochila - pesoMochila)+ "g.\n");
         preguntarUbicacion();
     }
 

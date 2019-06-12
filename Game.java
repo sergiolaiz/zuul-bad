@@ -211,6 +211,9 @@ public class Game
         else if (commandWord.equals("soltar")) {
             jugador.dropElemento(command.getSecondWord());
         }
+        else if (commandWord.equals("beber")) {
+            jugador.drink(command.getSecondWord());
+        }
         return wantToQuit;
     }
 
