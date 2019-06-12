@@ -88,7 +88,10 @@ public class Player
         }
         preguntarUbicacion();
     }
-
+    
+    /**
+     * Metodo que permite soltar objetos.
+     */
     public void dropElemento(String id){
         if(!mochila.isEmpty()){
             boolean buscando = true;
